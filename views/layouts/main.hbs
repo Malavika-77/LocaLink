@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #edf1f5;
+            padding-top: 56px; /* Space for fixed navbar */
+        }
+        .navbar {
+            background-color: #007bff; /* Updated color */
+        }
+        .navbar-brand img {
+            max-height: 40px;
+            border-radius: 50%; /* Rounded logo */
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff;
+            font-weight: bold; /* Bold text */
+        }
+        .navbar-nav .nav-link:hover {
+            color: #e2e6ea;
+        }
+        .nav-button {
+            border-radius: 20px; /* Rounded corners */
+            font-weight: bold;
+            height: 40px; /* Same height */
+            text-align: center;
+            padding: 0 20px; /* Add padding to ensure content is centered */
+            display: inline-flex; /* Use inline-flex to center text */
+            align-items: center; /* Vertically center text */
+            justify-content: center; /* Horizontally center text */
+        }
+        .btn-outline-light {
+            border-color: #ffffff;
+            color: #ffffff;
+            background-color: transparent; /* Transparent background */
+            border-width: 2px; /* Thicker border */
+        }
+        .btn-outline-light:hover {
+            background-color: #ffffff;
+            color: #007bff;
+            border-width: 2px; /* Maintain border width on hover */
+        }
+        .btn-light {
+            color: #007bff;
+            border-color: #007bff;
+            background-color: #ffffff; /* White background */
+        }
+        .btn-light:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .navbar-nav .nav-item {
+                margin: 5px 0;
+            }
+            .navbar-brand {
+                flex-grow: 1;
+                text-align: center;
+            }
+            .nav-buttons-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .nav-button {
+                flex: 1; /* Make buttons grow equally */
+                margin: 0 5px; /* Add space between buttons */
+                width: auto; /* Allow width to adjust */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">
+            <img src="logo.jpg" alt="LocaLink Logo">
+            LocaLink
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {{#if isLoggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Contact Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <form action="/logout" method="POST" class="form-inline">
+                            <button type="submit" class="btn btn-danger">Sign Out</button>
+                        </form>
+                    </li>
+                {{else}}
+                     
+                      {{#unless hidehomeLink}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item nav-buttons-container">
+                        <a class="btn btn-outline-light nav-button" href="/Signup">Sign Up</a>
+                        <a class="btn btn-light nav-button" href="/Login">Login</a>
+                    </li>
+                    {{/unless}}
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="container mt-0 ml-0">
+        {{{body}}}
+    </main>
+   {{#unless noFooter}}
+    <footer class="footer">
+        <div class="container text-center">
+            <h2 class="mb-3">Localink</h2>
+            <p class="mb-3">Discover unique, lesser-known attractions tailored to your interests. Connect with us to stay updated on the latest local experiences and travel tips.</p>
+            <div class="social-icons mb-4">
+                <a href="https://facebook.com" class="text-white mx-2" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com" class="text-white mx-2" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com" class="text-white mx-2" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com" class="text-white mx-2" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <div class="footer-nav mb-4">
+                <a href="/" class="text-white mx-2">Home</a>
+                <a href="/about" class="text-white mx-2">About Us</a>
+                <a href="/contact" class="text-white mx-2">Contact Us</a>
+            </div>
+            <p class="mb-2">&copy; 2024 Localink. All rights reserved.</p>
+            <p class="mb-0">
+                <a href="/privacy-policy" class="text-white">Privacy Policy</a> | 
+                <a href="/terms-of-service" class="text-white">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+    {{/unless}}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

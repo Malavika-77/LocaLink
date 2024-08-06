@@ -1,0 +1,534 @@
+<!-- Home Jumbotron Section -->
+<div id="home-jumbotron">
+  <!-- Background Image -->
+  <div class="full-width-image">
+    <img src="homeback.jpg" alt="Background Image">
+  </div>
+  <!-- Container for Centered Content -->
+  <div class="container text-center">
+    <!-- Main Heading -->
+    <h1 class="display-4 ">Welcome to Local Experience Finder</h1>
+    <!-- Subheading or Description -->
+<p class="lead" style="color: white; font-weight: bold;">Discover unique, lesser-known attractions tailored to your interests.</p>
+    <!-- Call-to-Action Button -->
+    <a href="/getstarted" class="btn btn-primary btn-lg">Get Started</a>
+     {{#if isLoggedIn}}
+     <a href="javascript:void(0);" class="btn btn-primary btn-lg" id="addReviewBtn">Add Review</a>
+     {{/if}}
+  </div>
+</div>
+
+
+
+
+
+<!-- Features Overview Section -->
+<section id="features-overview" class="py-5">
+  <div class="container text-center">
+    <h2 class="display-4">Discover Our Features</h2>
+    <p class="lead">Explore unique features designed to make your travel experience unforgettable.</p>
+    <div class="row flex-nowrap overflow-auto">
+      <!-- Feature 1 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="feature-box p-4 rounded shadow-sm">
+          <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+          <h3 class="h5">Personalized Recommendations</h3>
+          <p>Receive tailored suggestions based on your interests and current location.</p>
+        </div>
+      </div>
+      <!-- Feature 2 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="feature-box p-4 rounded shadow-sm">
+          <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+          <h3 class="h5">Book Experiences</h3>
+          <p>Seamlessly book local activities and events directly through the app.</p>
+        </div>
+      </div>
+      <!-- Feature 3 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="feature-box p-4 rounded shadow-sm">
+          <i class="fas fa-star fa-3x mb-3"></i>
+          <h3 class="h5">Detailed Information</h3>
+          <p>Access comprehensive details, reviews, and ratings for each experience.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--latest review--->
+<section id="latest-reviews" class="py-5">
+  <div class="container text-center">
+    <h2 class="display-4">Latest Reviews</h2>
+      {{#if isLoggedIn}}
+      <button id="delete-btn" class="btn btn-danger">Delete</button>
+      <button id="update-btn" class="btn btn-primary">Update</button><br><br>
+      {{/if}}
+    <div class="row" id="latest-reviews-container">
+      <!-- Cards will be inserted here by JavaScript -->
+    </div>
+  </div>
+</section>
+
+<div id="reviewModal" class="modal ">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h4 id="modalPlace"></h4>
+    <img id="modalImage" src="" alt="" class="reviewImage">
+    <div id="modalRating"></div>
+    <p id="modalReview"></p>
+  </div>
+</div>
+
+
+<section id="how-it-works" class="py-5 bg-light position-relative">
+  
+  <div class="container text-center position-relative z-index-1">
+    
+    <h2 class="display-4 font-weight-bold">How It Works</h2>
+    <p class="lead text-secondary">A simple guide to getting started with Localink.</p>
+    <div class="row flex-nowrap overflow-auto justify-content-center">
+      <!-- Step 1 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <a href="#" class="step-box clickable-box">
+          <i class="fas fa-search fa-3x text-primary mb-3"></i>
+          <h3 class="h5 text-dark">Search</h3>
+          <p class="text-muted">Use the search feature to find local attractions, events, and experiences.</p>
+        </a>
+      </div>
+      <!-- Step 2 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <a href="#" class="step-box clickable-box">
+          <i class="fas fa-heart fa-3x text-primary mb-3"></i>
+          <h3 class="h5 text-dark">Select</h3>
+          <p class="text-muted">Choose experiences that match your interests and preferences.</p>
+        </a>
+      </div>
+      <!-- Step 3 -->
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <a href="#" class="step-box clickable-box">
+          <i class="fas fa-calendar-check fa-3x text-primary mb-3"></i>
+          <h3 class="h5 text-dark">Book</h3>
+          <p class="text-muted">Book and manage your experiences with ease through the app.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- Popup Form add -->
+<div id="popupForm" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <div class="header">
+      <img src="logo.jpg" alt="LocalLink Logo" class="logo">
+      <h2>Add Your Review</h2>
+    </div>
+    <form id="reviewForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
+      </div>
+      <div class="form-group">
+        <label for="place">Place:</label>
+        <input type="text" id="place" name="place" required>
+      </div>
+      <div class="form-group">
+        <label for="image">Image URL:</label>
+        <input type="url" id="image" name="image">
+      </div>
+      <div class="form-group">
+        <label for="review">Review:</label>
+        <textarea id="review" name="review" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating:</label>
+        <div id="rating" class="rating">
+          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const reviewsContainer = document.getElementById('latest-reviews-container');
+  const reviewModal = document.getElementById('reviewModal');
+  const closeModalBtn = document.querySelector('.close');
+  const popupForm = document.getElementById('popupForm');
+  const addReviewBtn = document.getElementById('addReviewBtn');
+  const form = document.getElementById('reviewForm');
+
+  async function fetchLatestReviews() {
+    try {
+      const response = await fetch('/api/latest-reviews');
+      if (!response.ok) throw new Error('Network response was not ok');
+      const reviews = await response.json();
+      updateReviewsSection(reviews);
+    } catch (error) {
+      console.error('Error fetching latest reviews:', error);
+    }
+  }
+
+  function updateReviewsSection(reviews) {
+    reviewsContainer.innerHTML = ''; // Clear existing reviews
+    reviews.forEach(review => {
+      const card = document.createElement('div');
+      card.className = 'col-lg-3 col-md-6 col-12 mb-4';
+      card.innerHTML = `
+        <div class="review-card p-4 rounded shadow-sm">
+          <img src="${review.image || 'default.jpg'}" alt="${review.place}" class="img-fluid mb-3 review-image">
+          <h4>${review.place}</h4>
+          <div class="rating">${'&#9733;'.repeat(review.rating)}${'&#9734;'.repeat(5 - review.rating)}</div>
+        </div>
+      `;
+      reviewsContainer.appendChild(card);
+
+     const reviewImage = card.querySelector('.review-image');
+      reviewImage.addEventListener('click', () => {
+        document.getElementById('modalPlace').textContent = review.place;
+        document.getElementById('modalImage').src = review.image || 'default.jpg';
+        document.getElementById('modalImage').alt = review.place;
+        document.getElementById('modalRating').innerHTML = `${'&#9733;'.repeat(review.rating)}${'&#9734;'.repeat(5 - review.rating)}`;
+        document.getElementById('modalReview').textContent = review.review;
+        reviewModal.style.display = 'block'; // Show the modal
+      });
+    });
+  }
+
+  if (addReviewBtn) {
+    addReviewBtn.addEventListener('click', () => {
+      if (popupForm) popupForm.style.display = 'block'; // Show the popup form
+    });
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+      if (reviewModal) reviewModal.style.display = 'none'; // Hide the modal
+      if (popupForm) popupForm.style.display = 'none'; // Hide the popup form if open
+    });
+  }
+
+  window.addEventListener('click', (event) => {
+    if (event.target === reviewModal) {
+      reviewModal.style.display = 'none'; // Hide the modal if clicked outside
+    }
+    if (event.target === popupForm) {
+      popupForm.style.display = 'none'; // Hide the popup form if clicked outside
+    }
+  });
+
+  // Handle rating stars
+  const stars = document.querySelectorAll('#rating span');
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      stars.forEach((s, i) => {
+        s.style.color = i <= index ? 'gold' : 'black';
+      });
+    });
+  });
+
+  if (form) {
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const rating = Array.from(document.querySelectorAll('#rating span'))
+        .filter(span => span.style.color === 'gold').length;
+
+      const data = {
+        email: formData.get('email'),
+        country: formData.get('country'),
+        place: formData.get('place'),
+        image: formData.get('image'),
+        review: formData.get('review'),
+        rating: rating
+      };
+
+      try {
+        const response = await fetch('/api/review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          alert('Review submitted successfully!');
+          if (popupForm) popupForm.style.display = 'none'; // Hide the form after submission
+          form.reset();
+          fetchLatestReviews(); // Refresh the reviews after submission
+        } else {
+          alert('Failed to submit review.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the review.');
+      }
+    });
+  }
+
+  // Fetch latest reviews on page load
+  fetchLatestReviews();
+});
+</script>
+
+
+
+<!-- Update Review Modal -->
+<div id="updateReviewModal" class="modal">
+  <div class="modal-content">
+    <span class="close close-update-btn">&times;</span>
+    <img src="logo.jpg" alt="LocalLink Logo" class="logo-delete">
+    <h2>Update Review</h2>
+    <form id="updateReviewForm">
+      <label for="updateEmail">Email:</label>
+      <input type="email" id="updateEmail" name="email" required><br><br>
+
+      <label for="updatePlace">Place:</label>
+      <input type="text" id="updatePlace" name="place" required><br><br>
+
+      <label for="updateReview">Review:</label>
+      <textarea id="updateReview" name="review"></textarea><br><br>
+
+      <label for="updateRating">Rating:</label>
+      <div id="updateRatingValue" class="rating">
+        <span data-value="1">☆</span>
+        <span data-value="2">☆</span>
+        <span data-value="3">☆</span>
+        <span data-value="4">☆</span>
+        <span data-value="5">☆</span>
+      </div>
+
+      <button type="submit">Update</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const updateReviewModal = document.getElementById('updateReviewModal');
+    const closeUpdateBtn = document.querySelector('.close-update-btn');
+    const updateReviewForm = document.getElementById('updateReviewForm');
+    const updateBtn = document.getElementById('update-btn');
+    const updateRatingStars = document.querySelectorAll('#updateRatingValue span');
+    const reviewsContainer = document.getElementById('reviewsContainer');
+
+    let selectedRating = 0;
+
+    // Open modal on button click
+    updateBtn.addEventListener('click', () => {
+      updateReviewModal.style.display = 'block';
+    });
+
+    // Close modal when 'x' is clicked
+    closeUpdateBtn.addEventListener('click', () => {
+      updateReviewModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside of modal
+    window.addEventListener('click', (event) => {
+      if (event.target === updateReviewModal) {
+        updateReviewModal.style.display = 'none';
+      }
+    });
+
+    // Handle star rating selection
+    updateRatingStars.forEach((star) => {
+      star.addEventListener('click', () => {
+        selectedRating = star.getAttribute('data-value');
+        updateRatingStars.forEach((s) => {
+          s.style.color = s.getAttribute('data-value') <= selectedRating ? 'gold' : 'black';
+        });
+      });
+    });
+
+    // Handle form submission
+    updateReviewForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const email = document.getElementById('updateEmail').value;
+      const place = document.getElementById('updatePlace').value;
+      const review = document.getElementById('updateReview').value;
+      
+      try {
+        const response = await fetch('/api/update-review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            place,
+            review,
+            rating: selectedRating,
+          }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('Review updated successfully');
+          updateReviewModal.style.display = 'none';
+          await fetchAndDisplayReviews();
+        } else {
+          alert('Failed to update review');
+        }
+      } catch (error) {
+        console.error('Error updating review:', error);
+      }
+    });
+
+    // Function to fetch and display reviews
+    async function fetchAndDisplayReviews() {
+      try {
+        const response = await fetch('/api/latest-reviews');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const reviews = await response.json();
+        updateReviewsSection(reviews);
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    }
+
+    // Function to update the reviews section
+    function updateReviewsSection(reviews) {
+      reviewsContainer.innerHTML = ''; // Clear existing reviews
+      reviews.forEach(review => {
+        const card = document.createElement('div');
+        card.className = 'col-lg-3 col-md-6 col-12 mb-4';
+        card.innerHTML = `
+          <div class="review-card p-4 rounded shadow-sm">
+            <img src="${review.image || 'default.jpg'}" alt="${review.place}" class="img-fluid mb-3 review-image">
+            <h4>${review.place}</h4>
+            <div class="rating">${'&#9733;'.repeat(review.rating)}${'&#9734;'.repeat(5 - review.rating)}</div>
+          </div>
+        `;
+        reviewsContainer.appendChild(card);
+      });
+    }
+
+    // Fetch and display reviews on page load
+    fetchAndDisplayReviews();
+  });
+</script>
+
+
+
+
+<!-- Modal for Delete Form -->
+<div id="delete-modal" class="modal d-none">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <img src="logo.jpg" alt="LocalLink Logo" class="logo-delete">
+    <h2>Delete Entry</h2>
+    <p>Please provide the details to delete the entry.</p>
+
+   <form id="delete-form" method="post">
+        <label for="email">Email ID:</label>
+        <input type="email" id="emails" name="emails" required>
+        <br>
+        <label for="place">Place to Delete:</label>
+        <input type="text" id="places" name="places" required>
+       <br>
+        <button type="submit" class="btn btn-danger">Delete</button>
+       </form>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const deleteModal = document.getElementById('delete-modal');
+  const deleteBtn = document.getElementById('delete-btn');
+  const closeBtns = document.querySelectorAll('.close-btn');
+
+  // Show the delete modal when the delete button is clicked
+  deleteBtn.addEventListener('click', function() {
+    if (deleteModal) {
+      deleteModal.classList.remove('d-none');
+      deleteModal.style.display = 'block'; // Ensure modal is displayed
+    }
+  });
+
+  // Hide the delete modal when the close button is clicked
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      deleteModal.classList.add('d-none');
+      deleteModal.style.display = 'none'; // Ensure modal is hidden
+    });
+  });
+
+  // Hide the delete modal when clicking outside the modal content
+  window.addEventListener('click', function(event) {
+    if (event.target === deleteModal) {
+      deleteModal.classList.add('d-none');
+      deleteModal.style.display = 'none'; // Ensure modal is hidden
+    }
+  });
+
+  // Handle delete form submission
+  const deleteForm = document.getElementById('delete-form');
+  deleteForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = document.getElementById('emails').value.trim(); // Trim extra whitespace
+    const place = document.getElementById('places').value.trim(); // Trim extra whitespace
+
+    console.log('Form emails value:', email);
+    console.log('Form places value:', place);
+
+    if (!email || !place) {
+      console.error('Email or place is missing');
+      alert('Both email and place are required.');
+      return;
+    }
+
+    fetch('/api/delete-review', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, place }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(errData => {
+          throw new Error('Network response was not ok: ' + (errData.message || 'Unknown error'));
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Response data:', data);
+      if (data.success) {
+        alert('Entry deleted successfully');
+      } else {
+        alert('Failed to delete entry: ' + data.message);
+      }
+      deleteModal.classList.add('d-none'); // Hide the modal after submission
+      deleteModal.style.display = 'none'; // Ensure modal is hidden
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred: ' + error.message);
+    });
+  });
+});
+
+</script>
