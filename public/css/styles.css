@@ -795,16 +795,18 @@
 /* Update Review Modal Styles */
 #updateReviewModal .modal-content {
   background-color: #565454;
-  margin: 15% auto;
-  padding: 20px;
+  margin: 5% auto; /* Centered margin with slight space from top */
+  padding: 15px; /* Adjusted for better spacing */
   border: 1px solid #888;
-  width: 70%;
+  width: 400px; /* Default width for desktop screens */
+  max-width: 400px; /* Ensure modal does not exceed this width */
 }
 
+/* Close Button */
 .close-update-btn {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 24px; /* Size for desktop */
   font-weight: bold;
 }
 
@@ -813,18 +815,20 @@
   text-decoration: none;
   cursor: pointer;
 }
+
 /* Star Rating CSS */
 .star-rating {
   display: flex;
   direction: row-reverse;
-  font-size: 2rem; /* Adjust size as needed */
+  font-size: 1.5rem; /* Size for desktop screens */
   unicode-bidi: bidi-override;
   color: #ddd; /* Gray stars */
   cursor: pointer;
+  flex-wrap: nowrap; /* Ensures stars stay on one line */
 }
 
 .star-rating input {
-  display: none; /* Hide the actual input elements */
+  display: none; /* Hide actual input elements */
 }
 
 .star-rating label {
@@ -839,15 +843,74 @@
 .star-rating input:checked ~ label ~ label {
   color: #ddd; /* Reset color for unselected stars */
 }
+
 .rating {
   display: flex;
   cursor: pointer;
+  flex-wrap: nowrap; /* Ensures stars stay on one line */
 }
+
 .rating span {
-  font-size: 24px;
+  font-size: 24px; /* Size for desktop screens */
   color: black; /* Default color for unselected stars */
 }
 
+/* Responsive Adjustments */
+@media only screen and (max-width: 1024px) {
+  #updateReviewModal .modal-content {
+    width: 85%; /* Reduced width for medium screens */
+  }
+
+  .close-update-btn {
+    font-size: 22px; /* Slightly smaller for medium screens */
+  }
+
+  .star-rating {
+    font-size: 1.4rem; /* Adjusted for medium screens */
+  }
+
+  .rating span {
+    font-size: 22px; /* Adjusted for medium screens */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #updateReviewModal .modal-content {
+    width: 90%; /* Reduced width for tablets */
+  }
+
+  .close-update-btn {
+    font-size: 20px; /* Further adjustment for tablets */
+  }
+
+  .star-rating {
+    font-size: 1.25rem; /* Smaller size for tablets */
+  }
+
+  .rating span {
+    font-size: 20px; /* Smaller size for tablets */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #updateReviewModal .modal-content {
+    width: 95%; /* Almost full width for small screens */
+    margin: 0; /* Remove margin for very small screens */
+    border-radius: 0; /* Optional: Remove border-radius for very small screens */
+  }
+
+  .close-update-btn {
+    font-size: 18px; /* Adjusted for very small screens */
+  }
+
+  .star-rating {
+    font-size: 1rem; /* Smaller size for very small screens */
+  }
+
+  .rating span {
+    font-size: 18px; /* Smaller size for very small screens */
+  }
+}
 
 
 
@@ -864,8 +927,8 @@
   background-color: darkred; /* Darker red for delete button */
 }
 
+/* General Modal Styles */
 .modal {
-  
   position: fixed;
   top: 0;
   left: 0;
@@ -881,19 +944,52 @@
 .modal-content {
   position: relative;
   margin: auto;
-  padding: 26px;
+  padding: 20px; /* Adjusted for better spacing */
   background-color: rgb(114, 106, 106);
-  width: 50%;
-  top: 25%;
+  width: 60%; /* Default width for desktop screens */
+  max-width: 600px; /* Ensures modal does not exceed this width */
+  top: 20%; /* Adjusted for better centering */
+  border-radius: 8px; /* Optional: Rounded corners for modal */
 }
 
-
-.logo-delete{
-
+/* Logo Styles */
+.logo-delete {
   display: block;
-  margin-bottom: 20px;
-  max-width: 60px;
-  height: auto;
-  border-radius: 50%;
-  margin-left: 130px;
+  margin: 0 auto; /* Center logo horizontally */
+  max-width: 100px; /* Adjusted size for better fit */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 50%; /* Circular logo */
+}
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 1024px) {
+  .modal-content {
+    width: 70%; /* Reduced width for medium screens */
+  }
+
+  .logo-delete {
+    max-width: 80px; /* Adjusted size for medium screens */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .modal-content {
+    width: 80%; /* Further reduced width for tablets */
+  }
+
+  .logo-delete {
+    max-width: 70px; /* Adjusted size for tablets */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .modal-content {
+    width: 90%; /* Almost full width for small screens */
+    top: 10%; /* Adjusted for better centering on small screens */
+    padding: 15px; /* Adjusted padding for small screens */
+  }
+
+  .logo-delete {
+    max-width: 60px; /* Smaller size for very small screens */
+  }
 }
